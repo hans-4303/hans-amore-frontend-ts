@@ -1,7 +1,7 @@
-import type { User } from "../models/user.model";
-import { randomId } from "../utils/randomId.util";
-import { sign, decode, JWT_SECRET, JWT_EXPIRES_IN } from "../utils/jwt.util";
-import { wait } from "../utils/wait.util";
+import type { User } from "@models/user.model";
+import { randomId } from "@utils/randomId.util";
+import { sign, decode, JWT_SECRET, JWT_EXPIRES_IN } from "@utils/jwt.util";
+import { wait } from "@utils/wait.util";
 
 const users = [
   {

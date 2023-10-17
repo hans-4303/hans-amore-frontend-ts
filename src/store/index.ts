@@ -8,7 +8,7 @@ import type { ThunkAction } from "redux-thunk";
 import { configureStore } from "@reduxjs/toolkit";
 import type { Action } from "@reduxjs/toolkit";
 
-import { rootReducer } from "./rootReducer";
+import { rootReducer } from "@store/rootReducer";
 
 /* next.d.ts 생성 후 process 해결됨, 그런데 왜 store에서는 읽히고 다른 폴더에서는 안 읽히는지 모름 */
 export const store = configureStore({

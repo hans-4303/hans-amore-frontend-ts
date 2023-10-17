@@ -3,8 +3,8 @@ import { FC, ReactNode } from "react";
 import { StyledEngineProvider } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 
-import { themeCreator } from "./base";
-import { useSelector } from "@/store";
+import { themeCreator } from "@theme/base";
+import { useSelector } from "@store/index";
 
 const ThemeProviderWrapper: FC<{ children: ReactNode }> = (props) => {
   const themeName = useSelector((state) => state.theme.themeName);

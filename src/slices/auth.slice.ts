@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { authApi } from "../mocks/auth.mock";
-import { User } from "../models/user.model";
+import { authApi } from "@mocks/auth.mock";
+import { User } from "@models/user.model";
 
 export const initializeUser = createAsyncThunk<User | null, void>(
   "auth/initializeUser",

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Theme } from '@mui/material';
-import { PureLightTheme } from './schemes/PureLightTheme';
-import { GreyGooseTheme } from './schemes/GreyGooseTheme';
-import { PurpleFlowTheme } from './schemes/PurpleFlowTheme';
+import { PureLightTheme } from '@theme/schemes/PureLightTheme';
+import { GreyGooseTheme } from '@theme/schemes/GreyGooseTheme';
+import { PurpleFlowTheme } from '@theme/schemes/PurpleFlowTheme';
 
 export function themeCreator(theme: string): Theme {
   return themeMap[theme];
