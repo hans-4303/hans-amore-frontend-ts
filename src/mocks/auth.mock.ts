@@ -22,7 +22,7 @@ const users = [
 ];
 
 class AuthApi {
-  async login({ email, password }): Promise<string> {
+  async login({ email, password, rememberMe }): Promise<string> {
     await wait(500);
 
     return new Promise((resolve, reject) => {
