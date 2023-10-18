@@ -1,7 +1,14 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import Image from "next/image";
+import styles from "./page.module.css";
+
+// import { useSelector } from "@store/index";
 
 export default function Home() {
+  // const counter = useSelector((state) => state.counter.counter);
+  // console.log(counter);
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -15,7 +22,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -91,5 +98,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }

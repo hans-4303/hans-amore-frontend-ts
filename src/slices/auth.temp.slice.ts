@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { authApi } from "@mocks/auth.mock";
 import { User } from "@models/user.model";
 
-import { AuthState } from "@models/auth.model";
+import { AuthState, LoginUser, RegisterUser } from "@models/auth.model";
 
 export const initializeUser = createAsyncThunk<User | null, void>(
   "auth/initializeUser",
@@ -20,12 +20,6 @@ export const initializeUser = createAsyncThunk<User | null, void>(
     }
   }
 );
-
-type LoginUser = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};
 
 export const loginUser = createAsyncThunk<User, LoginUser>(
   "auth/loginUser",
@@ -47,12 +41,6 @@ export const logoutUser = createAsyncThunk<void, void>(
     localStorage.removeItem("accessToken");
   }
 );
-
-type RegisterUser = {
-  email: string;
-  name: string;
-  password: string;
-};
 
 export const registerUser = createAsyncThunk<User, RegisterUser>(
   "auth/registerUser",

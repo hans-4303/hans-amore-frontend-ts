@@ -1,6 +1,7 @@
 // import './globals.css'
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
+import { Providers } from "@/store/Provider";
 import PropTypes from "prop-types";
 
 type RootLayoutProps = {
@@ -17,7 +18,9 @@ export const metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
