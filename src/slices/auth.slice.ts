@@ -1,12 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { authApi } from "@mocks/auth.mock";
+import { AuthState } from "@models/auth.model";
 import { User } from "@models/user.model";
-
-interface AuthState {
-  isInitialized: boolean;
-  isAuthenticated: boolean;
-  user: User | null;
-}
 
 const initialState: AuthState = {
   isAuthenticated: false,
@@ -42,61 +37,3 @@ const authSlice = createSlice({
 
 export const { initialize, login, logout, register } = authSlice.actions;
 export default authSlice.reducer;
-
-export const initializeUser = createAsyncThunk<User | null, void>(
-  "auth/initializeUser",
-  async (_, { rejectWithValue }) => {
-    try {
-      const accessToken = window.localStorage.getItem("accessToken");
-      if (accessToken) {
-        const user = await authApi.me(accessToken);
-        return user;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-type LoginUser = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};
-
-export const loginUser = createAsyncThunk<User, LoginUser>(
-  "auth/loginUser",
-  async ({ email, password, rememberMe }, { rejectWithValue }) => {
-    try {
-      const accessToken = await authApi.login({ email, password, rememberMe });
-      const user = await authApi.me(accessToken);
-      localStorage.setItem("accessToken", accessToken);
-      return user;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-type RegisterUser = {
-  email: string;
-  name: string;
-  password: string;
-};
-
-export const registerUser = createAsyncThunk<User, RegisterUser>(
-  "auth/registerUser",
-  async ({ email, name, password }) => {
-    try {
-      const accessToken = await authApi.register({ email, name, password });
-      const user = await authApi.me(accessToken);
-      localStorage.setItem("accessToken", accessToken);
-      return user;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
-);

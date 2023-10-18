@@ -12,7 +12,7 @@ export type LoginUser = {
   rememberMe: boolean;
 };
 
-type RegisterUser = {
+export type RegisterUser = {
   email: string;
   name: string;
   password: string;
