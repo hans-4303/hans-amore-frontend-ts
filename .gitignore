@@ -36,3 +36,4 @@ next-env.d.ts
 
 # custom config and infomation
 next.config.js
+.vercel

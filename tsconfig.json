@@ -3,9 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@abstracts/*": ["./src/components/abstracts"],
-      "@commons/*": ["./src/components/commons"],
-      "@compounds/*": ["./src/components/compounds"],
+      "@abstracts/*": ["./src/components/abstracts/*"],
+      "@commons/*": ["./src/components/commons/*"],
+      "@compounds/*": ["./src/components/compounds/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@i18n/*": ["./src/i18n/*"],
       "@layouts/*": ["./src/layouts/*"],
