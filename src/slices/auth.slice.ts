@@ -2,6 +2,47 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { authApi } from "@mocks/auth.mock";
 import { User } from "@models/user.model";
 
+interface AuthState {
+  isInitialized: boolean;
+  isAuthenticated: boolean;
+  user: User | null;
+}
+
+const initialState: AuthState = {
+  isAuthenticated: false,
+  isInitialized: false,
+  user: null,
+};
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    initialize: (state, action: PayloadAction<AuthState>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+    login: (state, action: PayloadAction<User>) => {
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    },
+    logout: (state) => {
+      localStorage.removeItem("accessToken");
+      state.isAuthenticated = false;
+      state.user = null;
+    },
+    register: (state, action: PayloadAction<User>) => {
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    },
+  },
+});
+
+export const { initialize, login, logout, register } = authSlice.actions;
+export default authSlice.reducer;
+
 export const initializeUser = createAsyncThunk<User | null, void>(
   "auth/initializeUser",
   async (_, { rejectWithValue }) => {
@@ -55,66 +96,7 @@ export const registerUser = createAsyncThunk<User, RegisterUser>(
       return user;
     } catch (error) {
       console.error(error);
-      throw error; // 에러를 다시 던질 수도 있습니다.
+      throw error;
     }
   }
 );
-
-interface AuthState {
-  isInitialized: boolean;
-  isAuthenticated: boolean;
-  user: User | null;
-}
-
-const initialState: AuthState = {
-  isAuthenticated: false,
-  isInitialized: false,
-  user: null,
-};
-
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    initialize: (state, action: PayloadAction<AuthState>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    },
-    login: (state, action: PayloadAction<User>) => {
-      state.isAuthenticated = true;
-      state.user = action.payload;
-    },
-    logout: (state) => {
-      localStorage.removeItem("accessToken");
-      state.isAuthenticated = false;
-      state.user = null;
-    },
-    register: (state, action: PayloadAction<User>) => {
-      state.isAuthenticated = true;
-      state.user = action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(initializeUser.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.isAuthenticated = true;
-          state.user = action.payload;
-        }
-        state.isInitialized = true;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
-        state.user = action.payload;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
-        state.user = action.payload;
-      });
-  },
-});
-
-export const { initialize, login, logout, register } = authSlice.actions;
-export default authSlice.reducer;
